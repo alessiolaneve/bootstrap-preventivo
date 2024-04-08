@@ -1,16 +1,3 @@
-// Aggiungiamo la componente js di interazione con l’utente.
-// Quando l’utente fa click sul bottone submit del form, il sito deve calcolare l’ammontare del preventivo per le ore di lavoro richieste. 
-
-// Il prezzo finale è dato dal numero di ore per prezzo orario. Supponiamo per semplicità che ogni progetto richieda lo stesso numero di ore di lavoro (es: 10 ore).
-
-// Il prezzo orario per una commissione varia in questo modo:
-// se la commissione riguarda lo sviluppo backend il prezzo orario è di 20.50€/l’ora
-// se la commissione riguarda lo sviluppo frontend il prezzo orario è di 15.30€/l’ora
-// se la commissione riguarda l’analisi progettuale il prezzo orario è di 33.60€/l’ora
-
-
-// assegnare le variabili
-
 const codiciPromo = ['YHDNU32', 'JANJC63', 'PWKCN25', 'SJDPO96', 'POCIE24'];
 let sconto = 0;
 
@@ -28,7 +15,6 @@ function calcPrev(event) {
     calcSconto();
 
     const job = document.getElementById('inputJob').selectedIndex;
-    // console.log(job);
 
     const prices = [backPrice, frontPrice, projPrice];
 
@@ -38,14 +24,11 @@ function calcPrev(event) {
 
     } else if (job > 0 && job <= prices.length) {
         let price = (prices[job - 1] * 10);
-        // console.log(price);
 
         let priceSconto = price * sconto;
         let priceTot = price - priceSconto;
         let priceInt = Math.floor(priceTot);
-        console.log(priceInt);
         let priceDec = Math.floor((priceTot * 100) - (priceInt * 100));
-        console.log(priceDec);
 
         printPrice.innerHTML = `Prezzo finale <br> €  ${priceInt}<span style="font-size: 24px; color: #969090;">,${priceDec}`;
 
@@ -54,32 +37,27 @@ function calcPrev(event) {
 
 btn.addEventListener('click', calcPrev)
 
-// PER CALCOLARE LO SCONTO
-// trasformare la stringa in caps
-// controllare che il codice sia corretto
-// applicare sconto
 
 const inputPromo = document.getElementById('cod_promo').value;
-// console.log(inputPromo);
+
 const capsPromo = inputPromo.toUpperCase();
-// console.log(capsPromo);
+
 
 
 function calcSconto() {
+    let codiceVal = false;
+
     for (let i = 0; i < codiciPromo.length; i++) {
         const codice = codiciPromo[i];
-        // console.log(codice)
+
 
         if (capsPromo == codice) {
             sconto = 0.25;
             break;
         }
-        else if (inputPromo == "") {
-            break;
-        }
-        else if (sconto != 0.25) {
-            alert('Il codice promozionale inserito non è valido!')
-        }
+    }
+    if (codiceVal == false && inputPromo != "") {
+        alert('Il codice promozionale inserito non è valido!')
     }
 }
 
