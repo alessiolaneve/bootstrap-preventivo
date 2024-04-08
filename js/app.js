@@ -24,12 +24,16 @@ function calcPrev(event) {
 
     } else if (job > 0 && job <= prices.length) {
         let price = (prices[job - 1] * 10);
-
+        console.log(price)
         let priceSconto = price * sconto;
+        console.log(priceSconto)
         let priceTot = price - priceSconto;
+        console.log(priceTot)
         let priceInt = Math.floor(priceTot);
         let priceDec = Math.floor((priceTot * 100) - (priceInt * 100));
-
+        if (priceDec >= 0 && priceDec <= 9) {
+            priceDec = "0" + priceDec.toString();
+        }
         printPrice.innerHTML = `Prezzo finale <br> €  ${priceInt}<span style="font-size: 24px; color: #969090;">,${priceDec}`;
 
     }
@@ -53,6 +57,8 @@ function calcSconto() {
 
         if (capsPromo == codice) {
             sconto = 0.25;
+            console.log(sconto)
+            codiceVal = true;
             break;
         }
     }
