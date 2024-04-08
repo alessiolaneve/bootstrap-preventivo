@@ -38,12 +38,13 @@ function calcPrev(event) {
 
     } else if (job > 0 && job <= prices.length) {
         let price = (prices[job - 1] * 10);
-        console.log(price);
+        // console.log(price);
 
         let priceSconto = price * sconto;
         let priceTot = price - priceSconto;
 
-        printPrice.innerHTML = 'Prezzo finale: € ' + priceTot;
+        printPrice.innerHTML = `Prezzo finale 
+                                €  ${priceTot}`
 
     }
 }
@@ -64,17 +65,20 @@ const capsPromo = inputPromo.toUpperCase();
 function calcSconto() {
     for (let i = 0; i < codiciPromo.length; i++) {
         const codice = codiciPromo[i];
-        console.log(codice)
+        // console.log(codice)
 
         if (capsPromo == codice) {
             sconto = 0.25;
             break;
         }
-    }   if (sconto != 0.25) {
+        else if (inputPromo == "") {
+            break;
+        }
+        else if (sconto != 0.25) {
         alert('Il codice promozionale inserito non è valido!')
+        }
     }
 }
-
 
 // L’utente potrebbe decidere di utilizzare un codice promozionale tra i seguenti: YHDNU32, JANJC63, PWKCN25, SJDPO96, POCIE24.
 
