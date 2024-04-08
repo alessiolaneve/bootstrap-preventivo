@@ -42,9 +42,12 @@ function calcPrev(event) {
 
         let priceSconto = price * sconto;
         let priceTot = price - priceSconto;
+        let priceInt = Math.floor(priceTot);
+        console.log(priceInt);
+        let priceDec = Math.floor((priceTot * 100) - (priceInt * 100));
+        console.log(priceDec);
 
-        printPrice.innerHTML = `Prezzo finale 
-                                €  ${priceTot}`
+        printPrice.innerHTML = `Prezzo finale <br> €  ${priceInt}<span style="font-size: 24px; color: #969090;">,${priceDec}`;
 
     }
 }
@@ -75,7 +78,7 @@ function calcSconto() {
             break;
         }
         else if (sconto != 0.25) {
-        alert('Il codice promozionale inserito non è valido!')
+            alert('Il codice promozionale inserito non è valido!')
         }
     }
 }
